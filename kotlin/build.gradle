@@ -134,3 +134,31 @@ task runExampleClientRPC(type: JavaExec) {
     main = 'com.example.client.ExampleClientRPCKt'
     args 'localhost:10004'
 }
+
+def JarToCopy = copySpec{
+    from './build/libs/cordapp-template-0.1.jar'
+
+}
+
+task Deploy_Jar << {
+
+    copy {
+        with JarToCopy
+        into   "./build/nodes/nodea/plugins"
+    }
+
+    copy {
+        with JarToCopy
+        into   "./build/nodes/nodeb/plugins"
+    }
+
+    copy {
+        with JarToCopy
+        into   "./build/nodes/nodec/plugins"
+    }
+    copy {
+        with JarToCopy
+        into   "./build/nodes/controller/plugins"
+    }
+
+}
